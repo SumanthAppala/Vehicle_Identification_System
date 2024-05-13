@@ -1,3 +1,6 @@
-ultralytics==8.1.9
-streamlit==1.31.1
-wandb==0.16.4
+ultralytics==8.2.14
+transformers==4.40.2
+streamlit==1.34.0
+pytesseract==0.3.10
+#wandb==0.17.0
+#roboflow==1.1.28
