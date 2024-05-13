@@ -6,16 +6,16 @@ This project delves into using Object Detection, Image Classification and OCR to
 The goal is to detect and track cars from an image using object detection. Then run image classification on the detected cars to identify their brands (Mercedes, Ferrari, Ford, etc). Next, we once again run object detection on the image to detect licence plates. Next, we run OCR on the detected licence plates to record the licence plte numbers of each car. Finally all of this is wrapped in a streamlit UI, which is used to accept an image as the input and displays the output image with annotations and data.
 
 # Frameworks used:
-# YOLOv8: 
+YOLOv8: 
 - Is an object detection framework, which can be trained on various datasets to detect and track specefic objects in an image/video. 
 - Used to perform object detection to detect and localise cars, as well as licence plates, using custom trained weights
-# CLIP: 
+CLIP: 
 - Is a Vision Transformer that finds similarities between image text pairs. 
 - Used to perform image classification on the detected cards, to identify their brands.
-# Pytesseract: 
+Pytesseract: 
 - Is an open-source tool used to perform OCR on images and extract text from them. 
 - Used to extract licence plate numbers from the detected licence plate.
-# Streamlit:
+Streamlit:
 - It is the web-dev UI interface used to accept the input image and display the output image (with annotations) and data.
 
 ![alt text](image.png)
