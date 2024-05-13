@@ -1,0 +1,2 @@
+ultralytics==8.1.9
+streamlit==1.31.1
