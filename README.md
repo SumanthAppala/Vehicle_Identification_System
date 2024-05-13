@@ -3,7 +3,7 @@
 # Overview:
 This project delves into using Object Detection, Image Classification and OCR to build a vehicle identification system. 
 
-The goal is to detect and track cars from an image using object detection. Then run image classification on the detected cars to identify their brands (Mercedes, Ferrari, Ford, etc). Next, we once again run object detection on the image to detect licence plates. Finally we run OCR on the detected licence plates to record the licence plte numbers of each car. 
+The goal is to detect and track cars from an image using object detection. Then run image classification on the detected cars to identify their brands (Mercedes, Ferrari, Ford, etc). Next, we once again run object detection on the image to detect licence plates. Next, we run OCR on the detected licence plates to record the licence plte numbers of each car. Finally all of this is wrapped in a streamlit UI, which is used to accept an image as the input and displays the output image with annotations and data.
 
 # Frameworks used:
 # YOLOv8: 
@@ -15,12 +15,44 @@ The goal is to detect and track cars from an image using object detection. Then 
 # Pytesseract: 
 - Is an open-source tool used to perform OCR on images and extract text from them. 
 - Used to extract licence plate numbers from the detected licence plate.
+# Streamlit:
+- It is the web-dev UI interface used to accept the input image and display the output image (with annotations) and data.
 
 ![alt text](image.png)
 
 # Getting Started:
 
-Install pytesseract and the required python libraries from the requirements.txt file.
+Step 1:
+- Clone this repository by running the below command in terminal:
+```shell
+git clone https://github.com/SumanthAppala/Vehicle_Identification_System.git
+```
+Step 2:
+- Download and install the pytesseract .exe from the official website. Change path to the .exe file in the code (utils/inference.py - line 8)
+
+Step 3:
+Run the below command to install the required python libraries:
+```shell
+pip install -r requirements.txt
+```
+Step 4:
+In terminal run the below command:
+```shell
+streamlit run run_app.py
+```
+Step 5:
+Once the UI pops up in browser, upload an image from 'data/sample_images' and it will process and display the out image and text
+
+# Important files/locations:
+
+- run_app.py: is the main file that need to be run for the UI to open, and accept inputs, as well as display the output.
+
+- data/sample_images: contains the sameple images which to test this code on and analyse the output
+
+- utils/inference.py: Contains the detections and classification logic as well as code for the Vehicle and Licence plate identification System
+
+- utils/model_weights: contains the yolo object detection weights for the car detection and licence plate detection systems
+
 
 
 
