@@ -52,13 +52,13 @@ In the inference code, we use a 'SingletonMeta' type class. This ensures that on
 
 - runn_app.py (CAR_BRANDS - line 9): This list can be modified to identify more/different car brands based on the requirement. No additional training is requires as it is a pre-trained VLM. Currently it is set to identify 'BMW', 'Ferrari', 'Ford', 'Mercedes'.
 
-- data/sample_images: contains the sameple images which to test this code on and analyse the output
+- data/sample_images: contains the sample images which to test this code on and analyse the output
 
 - utils/inference.py: Contains the detections and classification logic as well as code for the Vehicle and Licence plate identification System
 
 - utils/model_weights: contains the yolo object detection weights for the car detection and licence plate detection systems
 
-# Expected Results:
+# Results:
 ![alt text](Result1.png)
 ![alt text](Result2.png)
 
