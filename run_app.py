@@ -6,7 +6,8 @@ from utils.inference import Vehicle, LicencePlate
 vehicle = Vehicle()
 licence = LicencePlate()
 
-CLASS_NAMES = ["Ford", "Mercedes", "BMW", "Ferrari"]
+#********* This list can be modified as required (No additional training required) *************
+CAR_BRANDS = ["Ford", "Mercedes", "BMW", "Ferrari"]
 
 uploaded_file = st.file_uploader(
     label="Drop an image here or click to upload", 
@@ -30,7 +31,7 @@ if uploaded_file is not None:
 
         if cropped_images:
             for cropped_image in cropped_images:
-                class_name, confidence = vehicle.classify_vehicle(cropped_image, CLASS_NAMES)
+                class_name, confidence = vehicle.classify_vehicle(cropped_image, CAR_BRANDS)
                 
         #Detect licence plates and run OCR on them
         licence_number, processed_image2 = licence.detect_licence(processed_image1)

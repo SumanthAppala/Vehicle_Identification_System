@@ -11,7 +11,7 @@ YOLOv8:
 - Used to perform object detection to detect and localise cars, as well as licence plates, using custom trained weights
 
 CLIP: 
-- Is a Vision Transformer that finds similarities between image text pairs. 
+- Is a Vision Transformer based VLM (Vision Language Model) that finds similarities between image text pairs. 
 - Used to perform image classification on the detected cards, to identify their brands.
 
 EasyOCR: 
@@ -50,6 +50,8 @@ In the inference code, we use a 'SingletonMeta' type class. This ensures that on
 
 - run_app.py: is the main file that need to be run for the UI to open, and accept inputs, as well as display the output.
 
+- runn_app.py (CAR_BRANDS - line 9): This list can be modified to identify more/different car brands based on the requirement. No additional training is requires as it is a pre-trained VLM. Currently it is set to identify 'BMW', 'Ferrari', 'Ford', 'Mercedes'.
+
 - data/sample_images: contains the sameple images which to test this code on and analyse the output
 
 - utils/inference.py: Contains the detections and classification logic as well as code for the Vehicle and Licence plate identification System
@@ -58,7 +60,7 @@ In the inference code, we use a 'SingletonMeta' type class. This ensures that on
 
 # Expected Results:
 ![alt text](Result1.png)
-
+![alt text](Result2.png)
 
 
 
