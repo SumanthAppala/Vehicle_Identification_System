@@ -1,4 +1,4 @@
-# Vehicle_Identification_System
+# Vehicle Identification System
 
 # Overview:
 This project delves into using Object Detection, Image Classification and OCR to build a vehicle identification system. 
