@@ -43,6 +43,9 @@ streamlit run run_app.py
 Step 4:
 Once the UI pops up in browser, upload an image from 'data/sample_images' and it will process and display the out image and text
 
+# Note:
+In the inference code, we use a 'SingletonMeta' type class. This ensures that only one instance of the class is created, no matter how many times it's called upon. This pattern can significantly reduce loading time as the initialization happens only once.
+
 # Important files/locations:
 
 - run_app.py: is the main file that need to be run for the UI to open, and accept inputs, as well as display the output.
@@ -53,8 +56,8 @@ Once the UI pops up in browser, upload an image from 'data/sample_images' and it
 
 - utils/model_weights: contains the yolo object detection weights for the car detection and licence plate detection systems
 
-# Note:
-In the inference code, we use a 'SingletonMeta' type class. This ensures that only one instance of the class is created, no matter how many times it's called upon. This pattern can significantly reduce loading time as the initialization happens only once.
+# Expected Results:
+![alt text](Result1.png)
 
 
 
