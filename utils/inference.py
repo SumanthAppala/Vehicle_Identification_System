@@ -1,11 +1,10 @@
-from PIL import Image, ImageDraw
+from PIL import Image
 import torch
 from transformers import CLIPProcessor, CLIPModel
 from ultralytics import YOLO
-import pytesseract
+import easyocr
 
-#Replace with path to local installation of pytesseract
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe' 
+reader = easyocr.Reader(['en'])
 
 def select_pytorch_device():
     """
@@ -22,8 +21,6 @@ def select_pytorch_device():
     else:
         return "cpu"
 
-
-
 class SingletonMeta(type):
     _instances = {}
     def __call__(cls, *args, **kwargs):
@@ -31,38 +28,35 @@ class SingletonMeta(type):
             cls._instances[cls] = super(SingletonMeta, cls).__call__(*args, **kwargs)
         return cls._instances[cls]
     
-    
 class Vehicle(metaclass=SingletonMeta):
     def __init__(self):
         # Initialize the models and processors
-        self.yolo_model = YOLO(r"model_weights/vehicle_weights.pt").to(self.device)
+        self.device = select_pytorch_device()
+        self.yolo_model = YOLO(r"utils\model_weights\vehicle_weights.pt").to(self.device)
         self.clip_model = CLIPModel.from_pretrained(r"openai/clip-vit-base-patch16").to(self.device)
         self.clip_processor = CLIPProcessor.from_pretrained(r"openai/clip-vit-base-patch16")
-        self.device = select_pytorch_device()
-
+        
     def detect_vehicle(self, image: Image):
         # YOLO detection logic
         results = self.yolo_model.predict(
             task="detect",
             source=image,
             save=False,  # Do not save predictions as we're going to stream them
-            conf=0.5,
-            classes=[3],
+            conf=0.1,
+            classes=[2,5,7],
             device=self.device)
         
         cropped_images = []
-        draw = ImageDraw.Draw(image) # Prepare to draw on the original image
         
         for r in results:
             # Check if there are any detections
-            if hasattr(r.boxes, 'xyxy') and len(r.boxes.xyxy) > 0 and (int(r.boxes.cls[0])) == 3:
+            if hasattr(r.boxes, 'xyxy') and len(r.boxes.xyxy) > 0:
                 for coordinates in r.boxes.xyxy:
                     x1, y1, x2, y2 = coordinates                 
                     cropped_image = image.crop((int(x1), int(y1), int(x2), int(y2)))
                     cropped_images.append(cropped_image)
-                    #draw.rectangle([x1, y1, x2, y2], outline="red", width = 4)
 
-                annotated_image = results[0].plot()
+        annotated_image = results[0].plot()
         return cropped_images, annotated_image
     
     def classify_vehicle(self, image: Image, class_names):
@@ -83,26 +77,31 @@ class Vehicle(metaclass=SingletonMeta):
 
         return class_names[indices[0].item()], values[0].item()
     
-class LicencePlate:
+class LicencePlate(metaclass=SingletonMeta):
     def __init__(self):
         # Initialize the models and processors
         self.device = select_pytorch_device()
         # Load the YOLO model 
-        self.model = YOLO(r"model_weights/licence_weights.pt").to(self.device)
+        self.model = YOLO(r"utils\model_weights\licence_weights.pt").to(self.device)
     
     def detect_licence(self, image: Image):
+        ocr_text=None
         results = self.model.predict(
             task="detect",
             source=image,
             save=False,  # Do not save predictions as we're going to stream them
             conf=0.3,
             device=self.device)
-        
+
         for detections in results:
-            for coordinates in detections.boxes.xyxy:
-                x1, y1, x2, y2 = coordinates
-                cropped_image = image.crop((int(x1), int(y1), int(x2), int(y2)))
-                text = pytesseract.image_to_string(cropped_image)
+            if hasattr(detections.boxes, 'xyxy') and len(detections.boxes.xyxy) > 0:
+                for coordinates in detections.boxes.xyxy:
+                    x1, y1, x2, y2 = coordinates
+                    cropped_image = image[int(y1):int(y2), int(x1):int(x2)]
+                    ocr_result = reader.readtext(cropped_image)
+                    for i in ocr_result:
+                        ocr_text = i[1]
         
         annotated_image = results[0].plot()
-        return text, annotated_image
+        return ocr_text, annotated_image
+        

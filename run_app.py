@@ -13,26 +13,39 @@ uploaded_file = st.file_uploader(
     type=["png", "jpg", "jpeg"],
 )
 
+# Placeholder for the images
+col1, col2 = st.columns(2)
+original_placeholder = col2.empty()
+annotated_placeholder = col1.empty()
+
 image = None  
 
 if uploaded_file is not None:
     original_image = Image.open(uploaded_file)
-    st.image(original_image, caption='Uploaded Image', use_column_width=True)
+    original_placeholder.image(original_image, caption='Uploaded Image', use_column_width=True)
 
     if original_image is not None:
         # Detect objects and get original image with bounding boxes
-        cropped_images, annotated_image = vehicle.detect_vehicle(original_image)
+        cropped_images, processed_image1 = vehicle.detect_vehicle(original_image)
 
         if cropped_images:
             for cropped_image in cropped_images:
                 class_name, confidence = vehicle.classify_vehicle(cropped_image, CLASS_NAMES)
-                st.write(f"Class: {class_name}, Confidence: {confidence:.2f}%")
-        
+                
         #Detect licence plates and run OCR on them
-        licence_number, annotated_image = licence.detect_licence(annotated_image)
-        st.write(f"Detect licence plates: {licence_number}")
+        licence_number, processed_image2 = licence.detect_licence(processed_image1)
 
         # Display the original image with bounding boxes
-        st.image(annotated_image, caption="Detected cars and licence plates", use_column_width=True)
+        annotated_placeholder.image(processed_image2, caption="Annotated Image", use_column_width=True)
+        
+        #Write results
+        st.write(f"Class: {class_name}, Confidence: {confidence:.2f}%")
+        if licence_number is not None:
+            st.write(f"Detected licence plate number: {licence_number}")
+        else:
+            st.write("No licence plate numbers could be extracted. Image unclear.")
     else:
         st.write("No objects detected.")
+
+    
+        
