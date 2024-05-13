@@ -21,7 +21,7 @@ EasyOCR:
 Streamlit:
 - It is the web-dev UI interface used to accept the input image and display the output image (with annotations) and data.
 
-![alt text](image.png)
+![alt text](process_schematic.png)
 
 # Getting Started:
 
