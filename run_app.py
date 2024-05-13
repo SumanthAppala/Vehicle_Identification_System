@@ -40,7 +40,7 @@ if uploaded_file is not None:
         annotated_placeholder.image(processed_image2, caption="Annotated Image", use_column_width=True)
         
         #Write results
-        st.write(f"Class: {class_name}, Confidence: {confidence:.2f}%")
+        st.write(f"Brand: {class_name}, Confidence: {confidence:.2f}%")
         if licence_number is not None:
             st.write(f"Detected licence plate number: {licence_number}")
         else:

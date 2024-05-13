@@ -3,7 +3,7 @@
 # Overview:
 This project delves into using Object Detection, Image Classification and OCR to build a vehicle identification system. 
 
-The goal is to detect and track cars from an image using object detection. Then run image classification on the detected cars to identify their brands (Mercedes, Ferrari, Ford, etc). Next, we once again run object detection on the image to detect licence plates. Next, we run OCR on the detected licence plates to record the licence plte numbers of each car. Finally all of this is wrapped in a streamlit UI, which is used to accept an image as the input and displays the output image with annotations and data.
+First we detect and track cars from an image using object detection. Then run image classification on the detected cars to identify their brands (Mercedes, Ferrari, Ford, etc). Next, we once again run object detection on the image to detect licence plates. After this, we run OCR on the detected licence plates to record the licence plate numbers of each car. Finally all of this is wrapped in a streamlit UI, which is used to accept an image as the input and displays the output image with annotations and data.
 
 # Frameworks used:
 YOLOv8: 
