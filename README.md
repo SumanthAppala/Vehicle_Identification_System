@@ -50,7 +50,7 @@ In the inference code, we use a 'SingletonMeta' type class. This ensures that on
 
 - run_app.py: is the main file that need to be run for the UI to open, and accept inputs, as well as display the output.
 
-- runn_app.py (CAR_BRANDS - line 9): This list can be modified to identify more/different car brands based on the requirement. No additional training is requires as it is a pre-trained VLM. Currently it is set to identify 'BMW', 'Ferrari', 'Ford', 'Mercedes'.
+- run_app.py (CAR_BRANDS - line 9): This list can be modified to identify more/different car brands based on the requirement. No additional training is requires as it is a pre-trained VLM. Currently it is set to identify 'BMW', 'Ferrari', 'Ford', 'Mercedes'.
 
 - data/sample_images: contains the sample images which to test this code on and analyse the output
 
