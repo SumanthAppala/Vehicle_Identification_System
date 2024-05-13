@@ -2,7 +2,7 @@ import streamlit as st
 from PIL import Image
 from utils.inference import Vehicle, LicencePlate
 
-# Create an instance of the ImageDecoder class
+# Create instances of the required classes
 vehicle = Vehicle()
 licence = LicencePlate()
 

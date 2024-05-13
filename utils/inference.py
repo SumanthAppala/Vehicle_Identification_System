@@ -4,7 +4,8 @@ from transformers import CLIPProcessor, CLIPModel
 from ultralytics import YOLO
 import pytesseract
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+#Replace with path to local installation of pytesseract
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe' 
 
 def select_pytorch_device():
     """
@@ -41,12 +42,13 @@ class Vehicle(metaclass=SingletonMeta):
 
     def detect_vehicle(self, image: Image):
         # YOLO detection logic
-        
-        results = self.yolo_model.predict(image, 
-                                             save=False,
-                                             conf=0.5,
-                                             classes=[3],
-                                             device=self.device)
+        results = self.yolo_model.predict(
+            task="detect",
+            source=image,
+            save=False,  # Do not save predictions as we're going to stream them
+            conf=0.5,
+            classes=[3],
+            device=self.device)
         
         cropped_images = []
         draw = ImageDraw.Draw(image) # Prepare to draw on the original image
