@@ -9,12 +9,15 @@ The goal is to detect and track cars from an image using object detection. Then 
 YOLOv8: 
 - Is an object detection framework, which can be trained on various datasets to detect and track specefic objects in an image/video. 
 - Used to perform object detection to detect and localise cars, as well as licence plates, using custom trained weights
+
 CLIP: 
 - Is a Vision Transformer that finds similarities between image text pairs. 
 - Used to perform image classification on the detected cards, to identify their brands.
+
 Pytesseract: 
 - Is an open-source tool used to perform OCR on images and extract text from them. 
 - Used to extract licence plate numbers from the detected licence plate.
+
 Streamlit:
 - It is the web-dev UI interface used to accept the input image and display the output image (with annotations) and data.
 
