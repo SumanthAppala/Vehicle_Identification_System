@@ -56,7 +56,7 @@ def main():
 
     # ### for resuming training #######
 
-    # wandb.init(project='Demo1', id='032ukvhi', resume=True)
+    # wandb.init(project='Vehicle_Identification', id='wandb-project-id', resume=True)
 
     # model = YOLO('path/to/latest/epoch/file')
     # results = model.train(resume=True,
