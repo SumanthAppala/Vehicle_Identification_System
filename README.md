@@ -8,11 +8,11 @@ First we detect and track cars from an image using object detection. Then run im
 # Frameworks used:
 YOLOv8: 
 - Is an object detection framework, which can be trained on various datasets to detect and track specefic objects in an image/video. 
-- Used to perform object detection to detect and localise cars, as well as licence plates, using custom trained weights
+- Used to perform object detection to detect and localise cars, as well as licence plates, using custom trained weights.
 
 CLIP: 
 - Is a Vision Transformer based VLM (Vision Language Model) that finds similarities between image text pairs. 
-- Used to perform image classification on the detected cards, to identify their brands.
+- Used to perform image classification on the detected cars, to identify their brands.
 
 EasyOCR: 
 - Is an open-source tool used to perform OCR on images and extract text from them. 
@@ -41,22 +41,22 @@ In terminal run the below command:
 streamlit run run_app.py
 ```
 Step 4:
-Once the UI pops up in browser, upload an image from 'data/sample_images' and it will process and display the out image and text
+Once the UI pops up in browser, upload an image from 'data/sample_images' and it will process and display the output image and text.
 
 # Note:
 In the inference code, we use a 'SingletonMeta' type class. This ensures that only one instance of the class is created, no matter how many times it's called upon. This pattern can significantly reduce loading time as the initialization happens only once.
 
 # Important files/locations:
 
-- run_app.py: is the main file that need to be run for the UI to open, and accept inputs, as well as display the output.
+- run_app.py: This is the main file that need to be run for the UI to open and accept inputs, as well as display the output.
 
-- run_app.py (CAR_BRANDS - line 9): This list can be modified to identify more/different car brands based on the requirement. No additional training is requires as it is a pre-trained VLM. Currently it is set to identify 'BMW', 'Ferrari', 'Ford', 'Mercedes'.
+- run_app.py (CAR_BRANDS - line 9): This list can be modified to identify more/different car brands based on the requirement. No additional training is requires as it is a trained on millions of images. Currently it is set to identify 'BMW', 'Ferrari', 'Ford', 'Mercedes'.
 
-- data/sample_images: contains the sample images which to test this code on and analyse the output
+- data/sample_images: Contains the sample images which can be used to test this code on and analyse the output.
 
-- utils/inference.py: Contains the detections and classification logic as well as code for the Vehicle and Licence plate identification System
+- utils/inference.py: Contains the detection, classification and OCR logic as well as code.
 
-- utils/model_weights: contains the yolo object detection weights for the car detection and licence plate detection systems
+- utils/model_weights: Contains the yolo object detection weights for the car detection and licence plate detection systems.
 
 # Results:
 ![alt text](Result1.png)
