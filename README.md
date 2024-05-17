@@ -27,6 +27,7 @@ Streamlit:
 
 Step 0:
 - Ensure you have git-lfs installed an running. (This is required to download the model weights)
+
 Step 1:
 - Clone this repository by running the below command in terminal:
 ```shell
